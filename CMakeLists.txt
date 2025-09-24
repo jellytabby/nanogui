@@ -75,6 +75,20 @@ if (CMAKE_CXX_COMPILER MATCHES "/em\\+\\+(-[a-zA-Z0-9.])?$")
   endif()
 endif()
 
+# Compile for a sufficiently recent processor. Assumes Nehalem+ (with SSE4.2) by
+# default. You may want to set MTS_NATIVE_FLAGS to "-march=native" to use all
+# instructions available on a particular machine.
+
+if (MSVC)
+  set(NANOGUI_NATIVE_FLAGS_DEFAULT "")
+elseif (APPLE AND ((CMAKE_OSX_ARCHITECTURES MATCHES "arm64") OR
+                   (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64")))
+  # Apple M1 compatibility
+  set(NANOGUI_NATIVE_FLAGS_DEFAULT "-mcpu=apple-a12")
+else()
+  set(NANOGUI_NATIVE_FLAGS_DEFAULT "-march=native")
+endif()
+
 option(NANOGUI_BUILD_EXAMPLES            "Build NanoGUI example application?" ON)
 option(NANOGUI_BUILD_SHARED              "Build NanoGUI as a shared library?" ${NANOGUI_BUILD_SHARED_DEFAULT})
 option(NANOGUI_BUILD_PYTHON              "Build a Python plugin for NanoGUI?" ${NANOGUI_BUILD_PYTHON_DEFAULT})
