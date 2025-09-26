@@ -163,8 +163,8 @@ Screen::Screen(const Vector2i &size, std::string_view caption, bool resizable,
        Default value is an OpenGL 3.3 core profile context. */
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, gl_major);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, gl_minor);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_FALSE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #elif defined(NANOGUI_USE_GLES)
     glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
